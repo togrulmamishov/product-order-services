@@ -4,25 +4,57 @@ services:
     image: mongo
     container_name: mongodb
     ports:
-      - 27017:27017
+      - "27017:27017"
     volumes:
-      - data:/data
+      - data:/data/mongodb
     environment:
       - MONGO_INITDB_ROOT_USERNAME=togrul
       - MONGO_INITDB_ROOT_PASSWORD=password
+    restart: unless-stopped
   mongo-express:
     image: mongo-express
     container_name: mongo-express
-    restart: always
+    restart: unless-stopped
     ports:
-      - 8081:8081
+      - "8081:8081"
     environment:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=togrul
       - ME_CONFIG_MONGODB_ADMINPASSWORD=password
       - ME_CONFIG_MONGODB_SERVER=mongodb
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: togrul
+      POSTGRES_PASSWORD: password
+      PGDATA: /data/postgres
+    volumes:
+      - data:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - data:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    networks:
+      - postgres
+    restart: unless-stopped
 volumes:
   data: {}
 
 networks:
-  default:
-    name: mongodb_network
+  spring:
+    driver: bridge
+  postgres:
+    driver: bridge
+

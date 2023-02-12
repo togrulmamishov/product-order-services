@@ -5,6 +5,7 @@ import com.togrul.product.dao.ProductRepository;
 import com.togrul.product.dto.ProductRequest;
 import com.togrul.product.model.Product;
 import com.togrul.product.service.ProductService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,7 @@ public class ProductServiceApplicationTests {
                         .content(json))
                 .andExpect(status().isCreated());
         assertEquals(1, productRepository.findAll().size());
-        assertEquals("Iphone 13", productRepository.findAll().get(0).getName());
+        Assertions.assertEquals("Iphone 13", productRepository.findAll().get(0).getName());
     }
 
     @Test

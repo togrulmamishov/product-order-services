@@ -1,9 +1,9 @@
 package com.togrul.product.service.impl;
 
+import com.togrul.product.service.ProductService;
 import com.togrul.product.dao.ProductRepository;
 import com.togrul.product.dto.ProductRequest;
 import com.togrul.product.model.Product;
-import com.togrul.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

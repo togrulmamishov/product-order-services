@@ -5,9 +5,9 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: togrul
     password: password
-    url: jdbc:postgresql://localhost:5432/order_service
+    url: jdbc:postgresql://localhost:5432/inventory_service
   jpa:
     hibernate:
       ddl-auto: update
 server:
-  port: 8586
+  port: 8587
