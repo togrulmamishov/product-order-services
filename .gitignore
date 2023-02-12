@@ -1,0 +1,5 @@
+/.idea/
+/product-service/target/
+/product-service/product-service.iml
+/order-service/target
+/order-service/order-service.iml

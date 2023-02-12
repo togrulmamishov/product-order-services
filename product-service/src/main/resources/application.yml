@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: product-service
+  data:
+    mongodb:
+      uri: mongodb://togrul:password@localhost:27017/product?authSource=admin
+server:
+  port: 8585
