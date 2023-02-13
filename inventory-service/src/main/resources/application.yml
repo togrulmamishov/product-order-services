@@ -1,6 +1,6 @@
 spring:
   application:
-    name: order-service
+    name: inventory-service
   datasource:
     driver-class-name: org.postgresql.Driver
     username: togrul
@@ -10,4 +10,8 @@ spring:
     hibernate:
       ddl-auto: update
 server:
-  port: 8587
+  port: 0
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

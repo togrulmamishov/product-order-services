@@ -1,10 +1,13 @@
 package com.togrul.inventory.controller;
 
+import com.togrul.inventory.dto.InventoryResponse;
 import com.togrul.inventory.service.InventoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -14,11 +17,11 @@ public class InventoryController {
 
     private final InventoryService inventoryService;
 
-    @GetMapping("/{sku-code}")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public boolean isInStock(@PathVariable("sku-code") String skuCode) {
-        log.info("Checking if inventory with sku-code {} exist in stock", skuCode);
+    public List<InventoryResponse> getInventoriesBySkuCodes(@RequestParam List<String> skuCode) {
+        log.info("Retrieving inventories by sku-code list {}", skuCode);
 
-        return inventoryService.isInStock(skuCode);
+        return inventoryService.getAllBySkuCodeList(skuCode);
     }
 }
