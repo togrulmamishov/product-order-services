@@ -27,7 +27,7 @@ public class OrderServiceImpl implements OrderService {
     private final WebClient.Builder webClientBuilder;
 
     @Override
-    public Order placeOrder(OrderRequest orderRequest) {
+    public String placeOrder(OrderRequest orderRequest) {
         Order order = new Order();
         order.setOrderNumber(UUID.randomUUID().toString());
 
@@ -63,6 +63,6 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.saveAndFlush(order);
         log.info("{} was saved successfully to database", order);
 
-        return order;
+        return String.format("Order %s placed successfully", order);
     }
 }
