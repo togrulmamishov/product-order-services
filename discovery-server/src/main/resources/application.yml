@@ -1,3 +1,4 @@
+
 eureka:
   username: ${EUREKA_USERNAME:eureka}
   password: ${EUREKA_PASSWORD:password}
@@ -8,3 +9,17 @@ eureka:
     fetch-registry: false
 server:
   port: 8761
+logging:
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+spring:
+  application:
+    name: discovery-server
