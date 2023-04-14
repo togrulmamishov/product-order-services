@@ -9,6 +9,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+logging:
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
 
 server:
   port: 0
@@ -18,6 +21,9 @@ eureka:
       defaultZone: http://eureka:password@localhost:8761/eureka
 
 management:
+  tracing:
+    sampling:
+      probability: 1.0
   health:
     circuitbreakers:
       enabled: true

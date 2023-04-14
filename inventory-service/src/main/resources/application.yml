@@ -9,6 +9,17 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+logging:
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 server:
   port: 0
 eureka:
