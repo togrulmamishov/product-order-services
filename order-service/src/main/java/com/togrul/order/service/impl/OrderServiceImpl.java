@@ -27,6 +27,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
 
     private final WebClient.Builder webClientBuilder;
+    private final KafkaTemplate<String, OrderPlacedEvent> kafkaTemplate;
 
     @Override
     public String placeOrder(OrderRequest orderRequest) {
@@ -63,6 +64,7 @@ public class OrderServiceImpl implements OrderService {
             throw new IllegalArgumentException("Product is not in stock, please try again later");
         }
         orderRepository.saveAndFlush(order);
+        kafkaTemplate.send("notificationTopic", new OrderPlacedEvent(order.getOrderNumber()));
         log.info("{} was saved successfully to database", order);
 
         return String.format("Order %s placed successfully", order);
