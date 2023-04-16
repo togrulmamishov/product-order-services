@@ -1,0 +1,19 @@
+spring:
+  data:
+    mongodb:
+      username: togrul
+      password: password
+      host: mongodb
+      port: 27017
+      database: product
+      authentication-database: admin
+server:
+  port: 8080
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:password@discovery-server:8761/eureka
+management:
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
